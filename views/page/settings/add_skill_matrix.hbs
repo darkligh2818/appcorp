@@ -1,0 +1,66 @@
+<div class="card">
+  <div class="card-body">
+    <h4 class="card-title">{{#if edit}}
+      Savolni tahrirlash
+      {{else}}
+      Yangi Savol
+      {{/if}}</h4>
+    <p class="card-description">
+      maydonlarni to'ldiring
+    </p>
+    <form class="forms-sample" action="/dashboard/skill_matrix/{{skill_matrix._id}}" method="post">
+      <div class="form-group">
+        <label>Savol to'plam nomi</label>
+        {{#if edit}}
+          <input type="hidden" name="_id" value="{{skill_matrix._id}}">
+        {{/if}}
+        <input required name="title" type="text" class="form-control" placeholder="Misol: Js"
+          value="{{skill_matrix.title}}" />
+      </div>
+      <div class="form-group">
+        <label>Bo'lim nomi</label>
+        <select class="form-control" name="department" required>
+          <option value="">Ro'yhatdan tanlang</option>
+          {{#each departments}}
+          <option value="{{this._id}}" {{#if this.selected}} selected {{/if}}>
+            {{this.title}}
+          </option>
+          {{/each}}
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Batafsil</label>
+        <textarea name="text" class="form-control" placeholder="Savol uchun batafsil maydon"
+          style="height: 100px;">{{skill_matrix.text}}</textarea>
+      </div>
+      <div class="form-group">
+        <label>Savollar</label>
+        <div id="list">
+          {{#if edit}}
+            {{#each skill_matrix.questions}}
+              <input type="text" value="{{this}}" class="form-control mt-10" name="questions" />
+            {{/each}}
+          {{else}}
+            <input type="text" class="form-control" name="questions" />
+          {{/if}}
+        </div>
+        <button type="button" onclick="addQuestions()" class="btn btn-success mt-10">
+          <i class="icon-square-plus"></i>
+        </button>
+      </div>
+      <button type="submit" class="btn btn-primary me-2">Submit</button>
+      <button class="btn btn-light">Cancel</button>
+    </form>
+  </div>
+</div>
+
+<script>
+  let list = document.getElementById('list') 
+  const addQuestions = () => {
+    let inp = document.createElement('input') 
+    inp.setAttribute('type', 'text')
+    inp.setAttribute('name', 'questions') 
+    inp.classList.add('form-control','mt-10') 
+    list.appendChild(inp)
+  }
+</script>

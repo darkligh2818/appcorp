@@ -1,0 +1,82 @@
+<div class="grid-margin stretch-card">
+  <div class="card">
+    <div class="card-body">
+      <div class="d-flex align-items-center justify-content-between">
+        <h4 class="card-title text-uppercase">
+          <b>Xodimlar Ro'yhati</b>
+        </h4>
+        <a href="worker/new">Yangi xodim</a>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>
+                <b>F.I.O</b>
+              </th>
+              <th>
+                <b>Lavozim</b>
+              </th>
+              <th>
+                <b>Bo'lim</b>
+              </th>
+              <th>
+                <b>Yaratilgan vaqti</b>
+              </th>
+              <th>
+                <b>Holati</b>
+              </th>
+              <th></th>
+              <th></th>
+          </thead>
+          <tbody>
+            {{#each workers}}
+            <tr>
+              <td>
+                <b>{{this.last_name}}</b>
+                <b>{{this.first_name}}</b>
+                <b>{{this.second_name}}</b>
+              </td>
+              <td>
+                <b>{{this.rank.title}}</b>
+              </td>
+              <td>
+                <b>{{this.department.title}}</b>
+              </td>
+              <td>
+                <b>{{this.createdAt}}</b>
+              </td>
+              <td>
+                <a href="/hr/worker/{{this._id}}">
+                  {{#if this.status }}
+                  <label class="badge badge-success">Faol</label>
+                  {{else}}
+                  <label class="badge badge-warning">Nofaol</label>
+                  {{/if}}
+                </a>
+              </td>
+              <td>
+                <a href="/hr/worker/{{this._id}}">Tahrirlash</a>
+              </td>
+              <td>
+                <a href="/hr/worker/delete/{{this._id}}" onclick="return confirm('Ishonchiz komilmi?')">O'chirish</a>
+              </td>
+            </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  fetch('/api/crud/rank') 
+  .then(res => res.json())
+  .then(res => {
+    console.log(res.data)
+  })
+  .catch(err => {
+    console.log(err)
+  })
+</script>

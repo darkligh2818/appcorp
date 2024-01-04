@@ -1,0 +1,52 @@
+<div class="card">
+  <div class="card-body">
+    <h4 class="card-title">
+      Rezyume Jo'natish
+      <p class="card-description">
+        maydonlarni to'ldiring
+      </p>
+      <form class="forms-sample" enctype="multipart/form-data" method="post">
+        <div class="form-group">
+          <label>Lavozim</label>
+          <select class="form-control" name="rank" required>
+            <option value="">Ro'yhatdan tanlang</option>
+            {{#each ranks}}
+            <option value="{{this._id}}" {{#if this.selected}} selected {{/if}}>
+              {{this.title}}
+            </option>
+            {{/each}}
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Familiyangiz</label>
+          <input required name="last_name" type="text" class="form-control" />
+        </div>
+        <div class="form-group">
+          <label>Ismingiz</label>
+          <input required name="first_name" type="text" class="form-control" />
+        </div>
+        <div class="form-group">
+          <label>Otangizni Ismi</label>
+          <input name="second_name" type="text" class="form-control" />
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input name="email" type="email" class="form-control" required/>
+        </div>
+        <div class="form-group">
+          <label>Telefon raqam</label>
+          <input name="phone" id="phone" type="text" class="form-control" required/>
+        </div>
+        <div class="form-group">
+          <label>Rasmingiz</label>
+          <input class="form-control" type="file" name="photo" />
+        </div>
+        <div class="form-group">
+          <label>Rezyumingiz</label>
+          <input class="form-control" type="file" name="resume" />
+        </div>
+        <button type="submit" class="btn btn-primary me-2">Jo'natish</button>
+        <button type="reset" class="btn btn-light">Tozalash</button>
+      </form>
+  </div>
+</div>

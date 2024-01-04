@@ -1,0 +1,98 @@
+<div class="card">
+  <div class="card-body">
+    <h4 class="card-title">
+      {{#if edit}}
+      Xodim tahrirlash
+      {{else}}
+      Xodim qo'shish
+      {{/if}}
+      <p class="card-description">
+        maydonlarni to'ldiring
+      </p>
+      <form class="forms-sample" action="/hr/worker/new/{{worker._id}}" enctype="multipart/form-data" method="post">
+
+        <div class="form-group">
+          <label>Familiyangiz</label>
+          {{#if edit}}
+          <input type="hidden" name="_id" value="{{worker._id}}">
+          {{/if}}
+          <input required name="last_name" type="text" value="{{worker.last_name}}" class="form-control" />
+        </div>
+
+        <div class="form-group">
+          <label>Ismingiz</label>
+          <input required value="{{worker.first_name}}" name="first_name" type="text" class="form-control" />
+        </div>
+
+        <div class="form-group">
+          <label>Otangizni Ismi</label>
+          <input name="second_name" value="{{worker.second_name}}" type="text" class="form-control" />
+        </div>
+
+        <div class="form-group">
+          <label>Email</label>
+          <input name="email" value="{{worker.user.email}}" type="email" class="form-control" required />
+        </div>
+
+        <div class="form-group">
+          <label>Parol</label>
+          <input name="password" type="password" class="form-control" required />
+        </div>
+
+        <div class="form-group">
+          <label>Bo'lim</label>
+          <select onchange="get_ranks(event.target.value)" class="form-control" name="department" required>
+            <option value="">Ro'yhatdan tanlang</option>
+            {{#each departments}}
+            <option value="{{this._id}}" {{#if this.selected}} selected {{/if}}>
+              {{this.title}}
+            </option>
+            {{/each}}
+          </select>
+        </div>
+        <!-- Rank section -->
+        <div class="form-group">
+          <label>Lavozim</label>
+          <select class="form-control" name="rank" required>
+            <option value="">Ro'yhatdan tanlang</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Tu'g'ulgan sana</label>
+          <input value="{{worker.birthday}}" name="birthday" type="date" class="form-control"/>
+        </div>
+
+        <div class="form-group">
+          <label>Rasmingiz</label>
+          <input value="{{worker.photo}}" class="form-control" type="file" name="photo" />
+        </div>
+
+        <button type="submit" class="btn btn-primary me-2">Jo'natish</button>
+        <button type="reset" class="btn btn-light">Tozalash</button>
+      </form>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+  const selectRank = document.querySelector('select[name=rank]')
+  
+  const get_ranks = id => {
+    axios.get('/api/crud/rank', {
+      params: {
+        search: {
+          department: id,
+          status: true
+        },
+        limit: 0,
+        select: ['_id', 'title']
+      }
+    })
+    .then(res => {
+      selectRank.innerHTML = "<option value=''>Ro'yhatdan tanlang</option>"
+      res.data.data.forEach(rank => {
+        selectRank.innerHTML += `<option value='${rank._id}'>${rank.title}</option>`
+      })
+    })
+  }
+</script>

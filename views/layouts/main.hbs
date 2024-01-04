@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+{{>head}}
+
+<body class="with-welcome-text">
+  <div class="container-scroller">
+    {{>nav}}
+    <div class="container-fluid page-body-wrapper">
+      {{>themeColor}}
+      {{>rightSidebar}}
+      {{>sidebar}}
+      <div class="main-panel">
+        <div class="content-wrapper">
+          {{{body}}}
+        </div>
+        {{>footer}}
+      </div>
+    </div>
+  </div>
+  {{>scripts}}
+</body>
+
+</html>

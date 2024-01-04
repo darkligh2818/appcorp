@@ -1,0 +1,77 @@
+<div class="grid-margin stretch-card">
+  <div class="card">
+    <div class="card-body">
+      <div class="d-flex align-items-center justify-content-between">
+        <h4 class="card-title text-uppercase">
+          <b> 
+            Suhbatlar ro'yhati
+          </b>
+        </h4>
+        <a class="nav-link" href="Interview/add">yangi suhbat</a>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>
+                <b>Nomzod</b>
+              </th>
+              <th>
+                <b>Xodimimiz</b>
+              </th>
+              <th>
+                <b>Lavozim</b>
+              </th>
+              <th>
+                <b>Umumiy bahosi</b>
+              </th>
+              <th>
+                <b>Holati</b>
+              </th>
+              <th></th>
+              <th></th>
+          </thead>
+          <tbody>
+            {{#each interviews}}
+            <tr>
+              <td>
+                <b>
+                  {{this.candidat.last_name}}
+                  {{this.candidat.first_name}}
+                </b>
+              </td>
+              <td>
+                <b>
+                  {{this.interviewer.last_name}}
+                  {{this.interviewer.first_name}}
+                </b>
+              </td>
+              <td>
+                <b>{{this.candidat.rank.title}}</b>
+              </td>
+              <td>
+                <b>{{this.finish_mark}}</b>
+              </td>
+              <td>
+                <a href="/dashboard/Interview/status/{{this._id}}">
+                  {{#if this.status }}
+                  <label class="badge badge-success">Faol</label>
+                  {{else}}
+                  <label class="badge badge-warning">Nofaol</label>
+                  {{/if}}
+                </a>
+              </td>
+              <td>
+                <a href="/dashboard/Interview/{{this._id}}">Tahrirlash</a>
+              </td>
+              <td>
+                <a href="/dashboard/Interview/delete/{{this._id}}" onclick="return confirm('Ishonchiz komilmi?')">O'chirish</a>
+              </td>
+            </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

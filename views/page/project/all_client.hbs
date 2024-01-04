@@ -1,0 +1,51 @@
+<div class="grid-margin stretch-card">
+  <div class="card">
+    <div class="card-body">
+      <div class="d-flex align-items-center justify-content-between">
+        <h4 class="card-title text-uppercase"><b>Mijozlar Ro'yhati</b></h4>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th><b>Bo'lim nomi</b></th>
+              <th><b>telefon raqam</b></th>
+              <th><b>Email</b></th>
+              <th><b>Yaratilgan vaqti</b></th>
+              <th><b>Holati</b> </th>
+              <th></th>
+              <th></th>
+          </thead>
+          <tbody>
+            {{#each clients}}
+            <tr>
+              <td><b>{{this.name}}</b></td>
+              <td><b>{{this.phone}}</b></td>
+              <td><b>{{this.email}}</b</td>
+              <td><b>{{this.createdAt}}</b></td>
+              
+              <td>
+                  <label 
+                    data-status="{{this.status}}"
+                    onclick="statusData(event, 'client', '{{this._id}}')" 
+                    class="badge {{statusClass}}">
+                    {{statusText}}
+                  </label>  
+              </td>
+
+              <td>
+                <a href="/dashboard/department/edit/{{this._id}}">Tahrirlash</a>
+              </td>
+
+              <td>
+                <a href="/dashboard/department/delete/{{this._id}}" onclick="return confirm('Ishonchiz komilmi?')">O'chirish</a>
+              </td>
+              
+            </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

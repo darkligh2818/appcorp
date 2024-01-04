@@ -1,0 +1,30 @@
+<div class="card">
+  <div class="card-body">
+    <h4 class="card-title">
+      {{#if edit}}
+      Xodim tahrirlash
+      {{else}}
+      Xodim qo'shish
+      {{/if}}
+      <p class="card-description">
+        maydonlarni to'ldiring
+      </p>
+      <form class="forms-sample" onsubmit="sendData(event, '/api/crud/client', '/project/client')" action="/hr/worker/new/{{worker._id}}" enctype="multipart/form-data" method="post">
+        <div class="form-group">
+          <label>Ism-familiya</label>
+          <input required name="name" type="text" class="form-control" />
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input required name="email" type="email" class="form-control" />
+        </div>
+        <div class="form-group">
+          <label>telefon raqami</label>
+          <input required name="phone" id="phone" type="text" class="form-control" />
+        </div>
+
+        <button type="submit" class="btn btn-primary me-2">Jo'natish</button>
+        <button type="reset" class="btn btn-light">Tozalash</button>
+      </form>
+  </div>
+</div>
